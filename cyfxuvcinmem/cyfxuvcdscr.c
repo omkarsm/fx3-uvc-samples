@@ -118,7 +118,7 @@ const uint8_t CyFxUSBSSConfigDscr[] __attribute__ ((aligned (32))) =
     /* Configuration descriptor */
     0x09,                           /* Descriptor size */
     CY_U3P_USB_CONFIG_DESCR,        /* Configuration descriptor type */
-    0xD3,0x00,                      /* Length of this descriptor and all sub descriptors */
+    0xE0,0x00,                      /* Length of this descriptor and all sub descriptors */
     0x02,                           /* Number of interfaces */
     0x01,                           /* Configuration number */
     0x00,                           /* COnfiguration string index */
@@ -150,8 +150,8 @@ const uint8_t CyFxUSBSSConfigDscr[] __attribute__ ((aligned (32))) =
     0x0D,                           /* Descriptor size: 13 bytes */
     0x24,                           /* Class specific i/f header descriptor type */
     0x01,                           /* Descriptor sub type : VC_HEADER */
-    0x10,0x01,                      /* Revision of class spec : 1.1 */
-    0x51,0x00,                      /* Total size of class specific descriptors (till output terminal) */
+    0x50,0x01,                      /* Revision of class spec : 1.5 */
+    0x5E,0x00,                      /* Total size of class specific descriptors (till output terminal) */
     0x00,0x6C,0xDC,0x02,            /* Clock frequency : 48MHz */
     0x01,                           /* Number of streaming interfaces */
     0x01,                           /* Video streaming i/f 1 belongs to VC i/f */
@@ -198,6 +198,17 @@ const uint8_t CyFxUSBSSConfigDscr[] __attribute__ ((aligned (32))) =
     0x00,0x00,0x00,                 /* No controls supported */
     0x00,                           /* String desc index : Not used */
 
+    /* Encoding unit descriptor (UVC 1.5) */
+    0x0D,                           /* Descriptor size: 13 bytes */
+    0x24,                           /* Class specific interface desc type */
+    CY_FX_UVC_VC_ENCODING_UNIT,     /* Encoding unit descriptor type */
+    0x05,                           /* ID of this unit */
+    0x03,                           /* Source ID : 3 : Connected to extn unit */
+    0x00,                           /* iEncoding: String descriptor index */
+    0x00,                           /* bControlSize: Size of controls field */
+    0x01,                           /* bControlsType: Bitmap indicating supported controls */
+    0x00,0x00,0x00,                 /* bmControls: Controls supported (placeholder) */
+
     /* Output terminal descriptor */
     0x09,                           /* Descriptor size: 9 bytes */
     0x24,                           /* Class specific interface desc type */
@@ -205,7 +216,7 @@ const uint8_t CyFxUSBSSConfigDscr[] __attribute__ ((aligned (32))) =
     0x04,                           /* ID of this terminal */
     0x01,0x01,                      /* USB streaming terminal type */
     0x00,                           /* No association terminal */
-    0x03,                           /* Source ID : 3 : Connected to extn Unit */
+    0x05,                           /* Source ID : 5 : Connected to encoding unit */
     0x00,                           /* String desc index : Not used */
 
     /* Video control status interrupt endpoint descriptor */
@@ -317,7 +328,7 @@ const uint8_t CyFxUSBHSConfigDscr[] __attribute__ ((aligned (32))) =
     /* Configuration descriptor */
     0x09,                           /* Descriptor size */
     CY_U3P_USB_CONFIG_DESCR,        /* Configuration descriptor type */
-    0xC7,0x00,                      /* Length of this descriptor and all sub descriptors */
+    0xD4,0x00,                      /* Length of this descriptor and all sub descriptors */
     0x02,                           /* Number of interfaces */
     0x01,                           /* Configuration number */
     0x00,                           /* COnfiguration string index */
@@ -349,8 +360,8 @@ const uint8_t CyFxUSBHSConfigDscr[] __attribute__ ((aligned (32))) =
     0x0D,                           /* Descriptor size */
     0x24,                           /* Class Specific I/f header descriptor type */
     0x01,                           /* Descriptor sub type : VC_HEADER */
-    0x10,0x01,                      /* Revision of class spec : 1.1 */
-    0x51,0x00,                      /* Total size of class specific descriptors (till output terminal) */
+    0x50,0x01,                      /* Revision of class spec : 1.5 */
+    0x5E,0x00,                      /* Total size of class specific descriptors (till output terminal) */
     0x00,0x6C,0xDC,0x02,            /* Clock frequency : 48MHz */
     0x01,                           /* Number of streaming interfaces */
     0x01,                           /* Video streaming I/f 1 belongs to VC i/f */
@@ -397,6 +408,17 @@ const uint8_t CyFxUSBHSConfigDscr[] __attribute__ ((aligned (32))) =
     0x00,0x00,0x00,                 /* No controls supported */
     0x00,                           /* String desc index : not used */
 
+    /* Encoding unit descriptor (UVC 1.5) */
+    0x0D,                           /* Descriptor size: 13 bytes */
+    0x24,                           /* Class specific interface desc type */
+    CY_FX_UVC_VC_ENCODING_UNIT,     /* Encoding unit descriptor type */
+    0x05,                           /* ID of this unit */
+    0x03,                           /* Source ID : 3 : Connected to extn unit */
+    0x00,                           /* iEncoding: String descriptor index */
+    0x00,                           /* bControlSize: Size of controls field */
+    0x01,                           /* bControlsType: Bitmap indicating supported controls */
+    0x00,0x00,0x00,                 /* bmControls: Controls supported (placeholder) */
+
     /* Output terminal descriptor */
     0x09,                           /* Descriptor size: 9 bytes */
     0x24,                           /* Class specific interface desc type */
@@ -404,7 +426,7 @@ const uint8_t CyFxUSBHSConfigDscr[] __attribute__ ((aligned (32))) =
     0x04,                           /* ID of this terminal */
     0x01,0x01,                      /* USB Streaming terminal type */
     0x00,                           /* No association terminal */
-    0x03,                           /* Source ID : 3 : connected to extn unit */
+    0x05,                           /* Source ID : 5 : Connected to encoding unit */
     0x00,                           /* String desc index : not used */
 
     /* Video control status interrupt endpoint descriptor */
