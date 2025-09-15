@@ -71,11 +71,12 @@ Each UVC example follows this pattern:
 ### USB Configuration
 
 Both examples implement:
-- USB Video Class (UVC) 1.0 specification
-- Video Control Interface (interface 0)
-- Video Streaming Interface (interface 1) 
+- USB Video Class (UVC) 1.5 specification (upgraded from 1.1)
+- Video Control Interface (interface 0) with encoding unit support
+- Video Streaming Interface (interface 1)
 - Standard UVC probe/commit control mechanism
-- MJPEG video format support
+- MJPEG video format support (backward compatible)
+- H.264/H.265 encoding framework support
 
 ## Development Environment
 
@@ -84,6 +85,38 @@ The build system expects:
 - ARM or GCC toolchain as configured in SDK
 - The SDK's `fx3_build_config.mak` provides compiler and linker settings
 
+## Testing System
+
+The project includes comprehensive separate test suites for both implementations:
+
+### Test Commands
+
+```bash
+# Run all validation tests (39 total tests)
+cd tests && bash validate_uvc15.sh              # Original comprehensive validation (25 tests)
+cd tests && bash run_iso_tests.sh               # Isochronous validation (6 tests)
+cd tests && bash run_bulk_tests.sh              # Bulk validation (8 tests)
+
+# Enhanced test system (when C compiler available)
+cd tests && make -f Makefile_master all         # Run both C test suites
+cd tests && make -f Makefile_master test-all    # Comprehensive testing
+cd tests/cyfxuvcinmem && make test              # ISO-specific C unit tests
+cd tests/cyfxuvcinmem_bulk && make test         # Bulk-specific C unit tests
+```
+
+### Test Structure
+- **tests/cyfxuvcinmem/**: 14 isochronous-specific tests (7 descriptor + 7 control)
+- **tests/cyfxuvcinmem_bulk/**: 18 bulk-specific tests (9 descriptor + 9 control)
+- **tests/**: General validation and coordination scripts
+
+## Project Context & Documentation
+
+For comprehensive project information:
+
+- **`CLAUDE_MEMORY.md`** - Complete project state, implementation decisions, test results, and technical history
+- **`UVC_1.5_UPGRADE.md`** - Detailed UVC 1.5 upgrade technical specifications and documentation
+- **Current Status**: UVC 1.5 upgrade complete with 39/39 tests passing, ready for pull request
+
 ## Important Notes
 
 - Video frames are stored as static arrays in `cyfxuvcvidframes.c`
@@ -91,3 +124,4 @@ The build system expects:
 - The bulk version is simpler and recommended for initial understanding
 - Full speed USB is not supported (high speed and super speed only)
 - Contains FX3-specific workarounds for Hi-Speed ISO transfer PID handling
+- **UVC 1.5 upgrade maintains full backward compatibility** with existing MJPEG functionality
