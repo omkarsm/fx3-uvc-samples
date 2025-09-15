@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(bash:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(gh:*)",
+      "Bash(where gh.exe)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
