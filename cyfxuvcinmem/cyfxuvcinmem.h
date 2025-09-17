@@ -95,6 +95,40 @@
 #define CY_FX_USB_UVC_VC_RQT_ERROR_CODE_CONTROL (0x0200)
 #define CY_FX_USB_UVC_RQT_STAT_INVALID_CTRL     (0x06)
 
+/* UVC 1.5 specific format descriptors */
+#define CY_FX_UVC_VS_FORMAT_H264        (0x10)                  /* H.264 format descriptor subtype */
+#define CY_FX_UVC_VS_FORMAT_H264_SIMULCAST (0x11)              /* H.264 simulcast format descriptor subtype */
+#define CY_FX_UVC_VS_FORMAT_H265        (0x12)                  /* H.265 format descriptor subtype */
+
+/* UVC 1.5 frame descriptors */
+#define CY_FX_UVC_VS_FRAME_H264         (0x11)                  /* H.264 frame descriptor subtype */
+#define CY_FX_UVC_VS_FRAME_H265         (0x13)                  /* H.265 frame descriptor subtype */
+
+/* UVC 1.5 encoding unit descriptor */
+#define CY_FX_UVC_VC_ENCODING_UNIT      (0x07)                  /* Encoding unit descriptor subtype */
+
+/* UVC 1.5 control selectors */
+#define CY_FX_UVC_EU_SELECT_LAYER_CONTROL           (0x01)      /* Select Layer Control */
+#define CY_FX_UVC_EU_PROFILE_TOOLSET_CONTROL        (0x02)      /* Profile and Toolset Control */
+#define CY_FX_UVC_EU_VIDEO_RESOLUTION_CONTROL       (0x03)      /* Video Resolution Control */
+#define CY_FX_UVC_EU_MIN_FRAME_INTERVAL_CONTROL     (0x04)      /* Minimum Frame Interval Control */
+#define CY_FX_UVC_EU_SLICE_MODE_CONTROL             (0x05)      /* Slice Mode Control */
+#define CY_FX_UVC_EU_RATE_CONTROL_MODE_CONTROL      (0x06)      /* Rate Control Mode Control */
+#define CY_FX_UVC_EU_AVERAGE_BITRATE_CONTROL        (0x07)      /* Average Bitrate Control */
+#define CY_FX_UVC_EU_CPB_SIZE_CONTROL               (0x08)      /* CPB Size Control */
+#define CY_FX_UVC_EU_PEAK_BIT_RATE_CONTROL          (0x09)      /* Peak Bit Rate Control */
+#define CY_FX_UVC_EU_QUANTIZATION_PARAMS_CONTROL    (0x0A)      /* Quantization Parameter Control */
+#define CY_FX_UVC_EU_SYNC_REF_FRAME_CONTROL         (0x0B)      /* Sync and Reference Frame Control */
+#define CY_FX_UVC_EU_LTR_BUFFER_CONTROL             (0x0C)      /* Long Term Reference Buffer Control */
+#define CY_FX_UVC_EU_LTR_PICTURE_CONTROL            (0x0D)      /* Long Term Reference Picture Control */
+#define CY_FX_UVC_EU_LTR_VALIDATION_CONTROL         (0x0E)      /* Long Term Reference Validation Control */
+#define CY_FX_UVC_EU_LEVEL_IDC_LIMIT_CONTROL        (0x0F)      /* Level IDC Limit Control */
+#define CY_FX_UVC_EU_SEI_PAYLOADTYPE_CONTROL        (0x10)      /* SEI Payload Type Control */
+#define CY_FX_UVC_EU_QP_RANGE_CONTROL               (0x11)      /* QP Range Control */
+#define CY_FX_UVC_EU_PRIORITY_CONTROL               (0x12)      /* Priority Control */
+#define CY_FX_UVC_EU_START_OR_STOP_LAYER_CONTROL    (0x13)      /* Start or Stop Layer Control */
+#define CY_FX_UVC_EU_ERROR_RESILIENCY_CONTROL       (0x14)      /* Error Resiliency Control */
+
 /* Extern definitions of the USB Enumeration constant arrays used for the Application */
 extern const uint8_t CyFxUSB20DeviceDscr[];
 extern const uint8_t CyFxUSB30DeviceDscr[];

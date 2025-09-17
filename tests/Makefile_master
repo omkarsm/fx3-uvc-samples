@@ -1,0 +1,124 @@
+# UVC 1.5 Master Test Suite Makefile
+# ===================================
+#
+# This Makefile coordinates testing for both UVC implementations:
+# - cyfxuvcinmem (isochronous endpoints)
+# - cyfxuvcinmem_bulk (bulk endpoints)
+
+# Default target - run all tests for both implementations
+all: test-iso test-bulk
+
+# Test isochronous implementation
+test-iso:
+	@echo "======================================================="
+	@echo "🔍 Testing UVC 1.5 Isochronous Implementation"
+	@echo "======================================================="
+	@cd cyfxuvcinmem && $(MAKE) test
+	@echo ""
+
+# Test bulk implementation
+test-bulk:
+	@echo "======================================================="
+	@echo "🔍 Testing UVC 1.5 Bulk Implementation"
+	@echo "======================================================="
+	@cd cyfxuvcinmem_bulk && $(MAKE) test
+	@echo ""
+
+# Build all test executables without running
+build-all:
+	@echo "Building all test executables..."
+	@cd cyfxuvcinmem && $(MAKE) all
+	@cd cyfxuvcinmem_bulk && $(MAKE) all
+	@echo "All test executables built successfully."
+
+# Run only descriptor tests for both implementations
+test-descriptors:
+	@echo "=== Running Descriptor Tests for Both Implementations ==="
+	@cd cyfxuvcinmem && $(MAKE) test-descriptors
+	@cd cyfxuvcinmem_bulk && $(MAKE) test-descriptors
+	@echo "=== All Descriptor Tests Completed ==="
+
+# Run only control tests for both implementations
+test-controls:
+	@echo "=== Running Control Tests for Both Implementations ==="
+	@cd cyfxuvcinmem && $(MAKE) test-controls
+	@cd cyfxuvcinmem_bulk && $(MAKE) test-controls
+	@echo "=== All Control Tests Completed ==="
+
+# Clean all build artifacts
+clean:
+	@echo "Cleaning all test build artifacts..."
+	@cd cyfxuvcinmem && $(MAKE) clean
+	@cd cyfxuvcinmem_bulk && $(MAKE) clean
+	@echo "All build artifacts cleaned."
+
+# Generate coverage reports for both implementations
+coverage:
+	@echo "Generating coverage reports for both implementations..."
+	@cd cyfxuvcinmem && $(MAKE) coverage
+	@cd cyfxuvcinmem_bulk && $(MAKE) coverage
+	@echo "Coverage reports generated."
+
+# Run the original validation script
+validate:
+	@echo "======================================================="
+	@echo "🔍 Running Original UVC 1.5 Validation Script"
+	@echo "======================================================="
+	@bash validate_uvc15.sh
+
+# Run comprehensive test suite (all tests + validation)
+test-all: all validate
+	@echo ""
+	@echo "======================================================="
+	@echo "🎉 COMPREHENSIVE TEST SUITE COMPLETED"
+	@echo "======================================================="
+	@echo "✓ Isochronous implementation tests"
+	@echo "✓ Bulk implementation tests"
+	@echo "✓ Original validation script"
+	@echo ""
+	@echo "All UVC 1.5 implementations have been thoroughly tested!"
+
+# List test files for both implementations
+list-tests:
+	@echo "Test files in this suite:"
+	@echo ""
+	@echo "Isochronous Implementation Tests:"
+	@echo "  cyfxuvcinmem/test_iso_descriptors.c"
+	@echo "  cyfxuvcinmem/test_iso_controls.c"
+	@echo ""
+	@echo "Bulk Implementation Tests:"
+	@echo "  cyfxuvcinmem_bulk/test_bulk_descriptors.c"
+	@echo "  cyfxuvcinmem_bulk/test_bulk_controls.c"
+	@echo ""
+	@echo "Original Tests:"
+	@echo "  test_uvc_descriptors.c (general)"
+	@echo "  test_uvc_controls.c (general)"
+	@echo "  validate_uvc15.sh (validation script)"
+
+# Help target
+help:
+	@echo "UVC 1.5 Master Test Suite"
+	@echo "========================="
+	@echo ""
+	@echo "Available targets:"
+	@echo "  all              - Run all tests for both implementations"
+	@echo "  test-iso         - Run tests for isochronous implementation only"
+	@echo "  test-bulk        - Run tests for bulk implementation only"
+	@echo "  build-all        - Build all test executables without running"
+	@echo "  test-descriptors - Run descriptor tests for both implementations"
+	@echo "  test-controls    - Run control tests for both implementations"
+	@echo "  validate         - Run original validation script"
+	@echo "  test-all         - Run comprehensive test suite (all + validation)"
+	@echo "  clean            - Clean all build artifacts"
+	@echo "  coverage         - Generate coverage reports"
+	@echo "  list-tests       - List all test files"
+	@echo "  help             - Show this help message"
+	@echo ""
+	@echo "Individual implementation help:"
+	@echo "  cd cyfxuvcinmem && make help       - Isochronous tests help"
+	@echo "  cd cyfxuvcinmem_bulk && make help  - Bulk tests help"
+
+# Quick test - just run the validation script
+quick-test: validate
+
+.PHONY: all test-iso test-bulk build-all test-descriptors test-controls clean coverage validate test-all list-tests help quick-test
